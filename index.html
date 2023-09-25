@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>java matrix rain</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" style="background: #111;"></canvas>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        var c = canvas.getContext('2d');
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        canvas.width =w;
+        canvas.height =h;
+
+        var fontSize = 16;
+        var column = Math.floor(w / fontSize);
+        var drops = [];
+
+        for (var i = 0; i < column; i++) {
+            drops.push(0);
+        }
+        var str = "Java Script matrix effect";
+        function draw(){
+            c.fillStyle = "rgba(0,0,0,0.05)";
+            c.fillRect(0,0,w,h);
+            c.fontSize = "700 "+ fontSize +"px";
+            c.fillStyle ="#00cc33";
+            for (var i = 0; i < column; i++) {
+                var index = Math.floor(Math.random()*str.length);
+                var x = i*fontSize;
+                var y = drops[i]*fontSize;
+                c.fillText(str[index],x,y);
+                if (y>=h && Math.random() > 0.99) {
+                    drops[i]=0;
+                }
+                drops[i]++;
+            }
+        }
+        draw();
+        setInterval(draw,35);
+    </script>
+</body>
+</html>
